@@ -1,1 +1,0 @@
-{"version":3,"file":"analytics.entity.d.ts","sourceRoot":"","sources":["../../../../src/modules/analytics/entities/analytics.entity.ts"],"names":[],"mappings":"AAEA,qBACa,SAAS;IAEpB,EAAE,EAAE,MAAM,CAAA;IAGV,MAAM,EAAE,MAAM,CAAA;IAGd,SAAS,EAAE,MAAM,CAAA;IAGjB,QAAQ,EAAE,MAAM,CAAC,MAAM,EAAE,GAAG,CAAC,CAAA;IAG7B,KAAK,EAAE,MAAM,CAAA;IAGb,SAAS,EAAE,IAAI,CAAA;CAChB"}
