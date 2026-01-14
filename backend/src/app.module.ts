@@ -9,9 +9,11 @@ import { AnalyticsModule } from "./modules/analytics/analytics.module"
 import { GovernanceModule } from "./modules/governance/governance.module"
 import { WalletModule } from "./modules/wallet/wallet.module"
 import { ApiKeyModule } from "./modules/api-key/api-key.module"
+import { ScheduleModule } from "@nestjs/schedule"
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ".env",

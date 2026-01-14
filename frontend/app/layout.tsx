@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
   title: "Nex Trade Waves",
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={GeistSans.className}>
       <body>
         <Providers>
           {children}

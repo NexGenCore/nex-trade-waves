@@ -9,19 +9,131 @@ import { Separator } from "@/components/ui/separator"
 import { Wallet, Shield, Eye, EyeOff } from "lucide-react"
 import Link from "next/link"
 import { BasecoinWalletModal } from "@/components/wallet/basecoin-wallet-modal"
+import { apiService, LoginDto, ApiError } from "@/lib/api"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog"
+import { useToast } from "@/hooks/use-toast"
+import { useRouter } from "next/navigation"
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  })
+  const [formErrors, setFormErrors] = useState<{ email?: string; password?: string }>({})
+  const [isForgotOpen, setIsForgotOpen] = useState(false)
+  const [forgotEmail, setForgotEmail] = useState("")
+  const [isForgotLoading, setIsForgotLoading] = useState(false)
+  const { toast } = useToast()
+  const router = useRouter()
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }))
+    // clear field-level error on change
+    setFormErrors(prev => ({ ...prev, [id]: undefined }))
+  }
+
+  const validateForm = () => {
+    const errors: { email?: string; password?: string } = {}
+    // simple email regex
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRe.test(formData.email)) {
+      errors.email = "Please enter a valid email address"
+    }
+    if (!formData.password || formData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters"
+    }
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
+    // client-side validation
+    if (!validateForm()) return
     setIsLoading(true)
 
-    setTimeout(() => {
+    try {
+      const loginData: LoginDto = {
+        email: formData.email,
+        password: formData.password,
+      }
+
+      const response = await apiService.login(loginData)
+      
+      // Store token in localStorage or sessionStorage
+      localStorage.setItem("token", response.token.access_token)
+      
+      toast({
+        title: "Success",
+        description: "You have been successfully signed in!",
+      })
+      
+  // Redirect to dashboard
+  router.replace("/dashboard")
+    } catch (error: any) {
+      if (error?.status === 401) {
+        toast({
+          title: "Invalid credentials",
+          description: "Email or password is incorrect. Please try again.",
+          variant: "destructive",
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: error?.message || "Failed to sign in",
+          variant: "destructive",
+        })
+      }
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
+  }
+
+  async function onForgotSubmit(event: React.SyntheticEvent) {
+    event.preventDefault()
+    setIsForgotLoading(true)
+    try {
+      await apiService.forgotPassword(forgotEmail)
+      toast({
+        title: "Password reset requested",
+        description:
+          "If an account with that email exists, you'll receive password reset instructions.",
+      })
+      setIsForgotOpen(false)
+      setForgotEmail("")
+    } catch (error: any) {
+      if (error?.status === 404) {
+        // Backend might not implement this endpoint — still show friendly message
+        toast({
+          title: "Not available",
+          description:
+            "Password reset is not available right now. Please contact support.",
+          variant: "destructive",
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: error?.message || "Failed to request password reset",
+          variant: "destructive",
+        })
+      }
+    } finally {
+      setIsForgotLoading(false)
+    }
   }
 
   return (
@@ -82,8 +194,14 @@ export default function SignInPage() {
                   autoComplete="email"
                   autoCorrect="off"
                   disabled={isLoading}
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="bg-white/50 border-amber-200 focus:border-amber-300 focus:ring-amber-300"
+                  required
                 />
+                {formErrors.email && (
+                  <p className="text-sm text-red-600 mt-1">{formErrors.email}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-gray-700">Password</Label>
@@ -96,7 +214,10 @@ export default function SignInPage() {
                     autoComplete="current-password"
                     autoCorrect="off"
                     disabled={isLoading}
+                    value={formData.password}
+                    onChange={handleInputChange}
                     className="bg-white/50 border-amber-200 focus:border-amber-300 focus:ring-amber-300 pr-10"
+                    required
                   />
                   <Button
                     type="button"
@@ -112,10 +233,23 @@ export default function SignInPage() {
                     )}
                   </Button>
                 </div>
+                {formErrors.password && (
+                  <p className="text-sm text-red-600 mt-1">{formErrors.password}</p>
+                )}
+                <div className="flex justify-end mt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsForgotOpen(true)}
+                    className="text-sm text-amber-600 hover:underline"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
               </div>
               <Button
                 className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium py-3 shadow-lg hover:shadow-xl transition-all"
                 disabled={isLoading}
+                type="submit"
               >
                 {isLoading ? (
                   <div className="flex items-center">
@@ -127,6 +261,35 @@ export default function SignInPage() {
                 )}
               </Button>
             </form>
+
+            {/* Forgot password dialog */}
+            <Dialog open={isForgotOpen} onOpenChange={setIsForgotOpen}>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Reset your password</DialogTitle>
+                  <DialogDescription>
+                    Enter your email and we'll send instructions to reset your password.
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={onForgotSubmit} className="space-y-4 mt-4">
+                  <div>
+                    <Label htmlFor="forgotEmail" className="text-gray-700">Email</Label>
+                    <Input
+                      id="forgotEmail"
+                      type="email"
+                      value={forgotEmail}
+                      onChange={(e) => setForgotEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit" disabled={isForgotLoading}>
+                      {isForgotLoading ? "Sending..." : "Send reset link"}
+                    </Button>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
 
             <div className="text-center text-sm text-gray-600">
               {"Don't have an account? "}
@@ -147,6 +310,12 @@ export default function SignInPage() {
 
       {/* Basecoin Wallet Modal */}
       <BasecoinWalletModal open={isWalletModalOpen} onOpenChange={setIsWalletModalOpen} />
+      {/* Full-screen loader while signing in */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
     </div>
   )
 }

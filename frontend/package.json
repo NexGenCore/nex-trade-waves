@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@coinbase/onchainkit": "^1.1.1",
+    "@coinbase/onchainkit": "^1.1.2",
     "@fastify/static": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@nestjs/common": "latest",
@@ -72,6 +72,7 @@
     "express-rate-limit": "latest",
     "express-validator": "latest",
     "fastify": "latest",
+    "framer-motion": "^12.23.24",
     "fs": "latest",
     "geist": "^1.5.1",
     "helmet": "latest",

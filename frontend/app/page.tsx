@@ -39,7 +39,7 @@ export default function HomePage() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            {/* <WalletConnect /> */}
+           
             <Button asChild variant="outline" className="hidden md:flex">
               <Link href="/signin">Sign In</Link>
             </Button>

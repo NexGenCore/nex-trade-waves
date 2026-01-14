@@ -39,6 +39,11 @@ export class UsersService {
   }
 
   async update(id: string, updateData: any) {
+    // Don't allow updating the password through this method
+    if (updateData.password) {
+      delete updateData.password
+    }
+    
     await this.usersRepository.update(id, updateData)
     return this.findById(id)
   }

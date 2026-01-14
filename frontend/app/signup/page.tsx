@@ -9,19 +9,91 @@ import { Separator } from "@/components/ui/separator"
 import { Wallet, Shield, Eye, EyeOff, Check } from "lucide-react"
 import Link from "next/link"
 import { BasecoinWalletModal } from "@/components/wallet/basecoin-wallet-modal"
+import { apiService, RegisterDto } from "@/lib/api"
+import { useToast } from "@/hooks/use-toast"
+import { useRouter } from "next/navigation"
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  })
+  const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; password?: string }>({})
+  const { toast } = useToast()
+  const router = useRouter()
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }))
+    setFormErrors(prev => ({ ...prev, [id]: undefined }))
+  }
+
+  const validateForm = () => {
+    const errors: { name?: string; email?: string; password?: string } = {}
+    if (!formData.name || formData.name.trim().length === 0) {
+      errors.name = "Please enter your full name"
+    }
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRe.test(formData.email)) {
+      errors.email = "Please enter a valid email address"
+    }
+    if (!formData.password || formData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters"
+    }
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
+    // client-side validation
+    if (!validateForm()) return
     setIsLoading(true)
 
-    setTimeout(() => {
+    try {
+      const registerData: RegisterDto = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      }
+
+      const response = await apiService.register(registerData)
+      
+      // Store token in localStorage or sessionStorage
+      localStorage.setItem("token", response.token.access_token)
+      
+      toast({
+        title: "Success",
+        description: "Your account has been created successfully!",
+      })
+      
+  // Redirect to dashboard
+  router.replace("/dashboard")
+    } catch (error: any) {
+      // If backend returns a Conflict (409) because email exists, show a helpful message
+      if (error?.status === 409) {
+        toast({
+          title: "Account exists",
+          description: "An account with that email already exists. Try signing in.",
+          variant: "destructive",
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: error?.message || "Failed to create account",
+          variant: "destructive",
+        })
+      }
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
   }
 
   return (
@@ -104,8 +176,14 @@ export default function SignUpPage() {
                   autoComplete="name"
                   autoCorrect="off"
                   disabled={isLoading}
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className="bg-white/50 border-amber-200 focus:border-amber-300 focus:ring-amber-300"
+                  required
                 />
+                {formErrors.name && (
+                  <p className="text-sm text-red-600 mt-1">{formErrors.name}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-gray-700">Email</Label>
@@ -117,8 +195,14 @@ export default function SignUpPage() {
                   autoComplete="email"
                   autoCorrect="off"
                   disabled={isLoading}
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="bg-white/50 border-amber-200 focus:border-amber-300 focus:ring-amber-300"
+                  required
                 />
+                {formErrors.email && (
+                  <p className="text-sm text-red-600 mt-1">{formErrors.email}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-gray-700">Password</Label>
@@ -131,7 +215,10 @@ export default function SignUpPage() {
                     autoComplete="new-password"
                     autoCorrect="off"
                     disabled={isLoading}
+                    value={formData.password}
+                    onChange={handleInputChange}
                     className="bg-white/50 border-amber-200 focus:border-amber-300 focus:ring-amber-300 pr-10"
+                    required
                   />
                   <Button
                     type="button"
@@ -147,10 +234,14 @@ export default function SignUpPage() {
                     )}
                   </Button>
                 </div>
+                {formErrors.password && (
+                  <p className="text-sm text-red-600 mt-1">{formErrors.password}</p>
+                )}
               </div>
               <Button
                 className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium py-3 shadow-lg hover:shadow-xl transition-all"
                 disabled={isLoading}
+                type="submit"
               >
                 {isLoading ? (
                   <div className="flex items-center">
