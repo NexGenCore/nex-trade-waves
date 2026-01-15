@@ -36,7 +36,7 @@ import { ScheduleModule } from "@nestjs/schedule"
     AnalyticsModule,
     GovernanceModule,
     WalletModule,
-    ApiKeyModule,
+    ApiKeyModule
   ],
 })
 export class AppModule {}
