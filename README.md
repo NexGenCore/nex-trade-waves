@@ -265,6 +265,8 @@ Ensure all tests pass
 
 🔗 Links
 
+Live Frontend: https://nex-trade-waves.vercel.app/
+
 GitHub: https://github.com/KAMALDEEN333/nex-trade-waves
 
 Live App: https://nex-trade-waves-ilgv90c7e-kamaldeen-aliyus-projects.vercel.app/
