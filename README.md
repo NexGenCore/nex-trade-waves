@@ -1,185 +1,200 @@
-# Nex Trade Wave 🌊 — Full Stack DeFi Platform
+Nex Trade Wave 🌊 — Full Stack DeFi Platform
 
-Nex Trade Wave 🌊 is a **full‑stack decentralized trading and learning ecosystem** designed to make Web3 trading **smarter, safer, and more accessible**.
+Nex Trade Wave 🌊 is a full-stack decentralized trading and learning platform built to make Web3 trading safer, smarter, and more accessible for beginners(new users), professionals, and institutions
 
-The platform combines:
+It combines a high-performance Next.js frontend, a secure and scalable NestJS backend, and the Stellar blockchain ecosystem to deliver non-custodial trading, real-time analytics, and simulation-based learning—all in one unified platform.
+This repository contains the core architecture that powers live trading, simulations, wallets, governance, and developer integrations.
 
-* **Next.js Frontend** for a high‑performance user experience
-* **NestJS Backend** for secure, scalable APIs
-* **Stellar Ecosystem** as the core blockchain layer for fast, low‑cost, non‑custodial transactions
+🌍 Problem Statement
 
-This repository represents the **core platform architecture**, supporting learning, simulation, live trading, and governance.
+Despite the growth of DeFi, crypto trading remains difficult to onboard and risky for many users.
 
----
+Key Challenges
 
-## 🌍 Problem Statement
+Fragmented tools for trading, learning, analytics, and portfolio management
 
-Despite explosive growth in DeFi, crypto trading remains **fragmented, risky, and difficult to onboard**.
+High financial risk for new traders
 
-### ⚠️ Challenges in Today’s Market
+Custodial and transparency risks on centralized platforms
 
-* Fragmented tools for trading, analytics, learning, and portfolio management
-* High risk for beginners entering volatile markets
-* Limited transparency and custodial risks on centralized platforms
-* Complex onboarding (wallets, keys, DeFi concepts)
-* High fees and slow settlement on poorly optimized networks
+Complex onboarding into wallets, keys, and DeFi concepts
 
----
+High fees and slow settlement on inefficient networks
 
-## 🚀 Nex Trade Wave — The Solution
+🚀 Nex Trade Wave — The Solution
 
-Nex Trade Wave 🌊 merges **institution‑grade decentralized trading** with a **gamified, simulation‑based learning ecosystem**, built on the **Stellar blockchain** for speed, security, and scalability.
+Nex Trade Wave 🌊 merges institution-grade decentralized trading with a gamified, simulation-based learning ecosystem, built on Stellar for speed, security, and low fees.
 
-### 🔧 What Users Can Do
+What Users Can Do
 
-* **Trade Smarter** – Access 700+ crypto assets with deep liquidity and analytics
-* **Learn Without Risk** – Practice with real‑market simulations before trading live
-* **Earn & Grow** – Participate in staking, DAO governance, and learning incentives
-* **Cross‑Chain Ready** – Stellar‑native with planned Ethereum & StarkNet interoperability
+Trade Smarter — Access deep-liquidity crypto markets with real-time analytics
 
-### 🛡️ Why It’s Easier & Safer
+Learn Without Risk — Practice strategies using real-market simulations
 
-* Unified trading, learning, analytics, and governance platform
-* Non‑custodial wallets with security‑first design
-* Risk‑free onboarding via simulated trading
-* DAO‑driven transparency and decision‑making
-* Stellar‑powered fast execution and ultra‑low fees
+Earn & Participate — Staking, DAO governance, and learning incentives
 
----
+Go Cross-Chain — Stellar-native with Ethereum & StarkNet roadmap
 
-## ✨ Unique Value Proposition
+Why It’s Safer & Easier
 
-### 🌊 Redefining Decentralized Trading & Education
+Non-custodial wallets (users own their keys)
 
-Nex Trade Wave 🌊 is the **first platform** to unify:
+Simulation-first onboarding
 
-* Institutional‑grade decentralized trading
-* AI‑driven market intelligence
-* Gamified, simulation‑based financial education
+DAO-driven transparency
 
-Users can **learn, test strategies, and trade live** — all within one non‑custodial ecosystem.
+Fast execution and ultra-low fees via Stellar
 
-### 🚀 Why Nex Trade Wave Stands Out
+✨ Unique Value Proposition
 
-1. **Learn‑to‑Trade Flow** – Simulations reduce risk and build confidence
-2. **Unified Multi‑Chain Terminal** – Stellar‑first with cross‑chain roadmap
-3. **AI‑Powered Insights** – Personalized analytics and performance feedback
-4. **Security‑First Infrastructure** – Multi‑sig wallets, DAO governance
-5. **Community Ownership** – Users help shape the platform’s evolution
+Nex Trade Wave 🌊 uniquely unifies:
 
----
+Decentralized trading execution
 
-## 🧩 Platform Architecture
+AI-driven market insights
 
-### 🖥️ Frontend (Next.js)
+Simulation-based financial education
 
-* Next.js (App Router)
-* TypeScript
-* Tailwind CSS + ShadCN UI
-* SSR & SSG for performance and SEO
-* Secure auth flows and dashboards
-* Real‑time trading, wallet, and simulation views
-* Gamified learning modules
+Users can learn, test strategies, and trade live—without leaving the platform.
 
-### ⚙️ Backend (NestJS)
+🧩 Platform Architecture
+🖥️ Frontend (Next.js)
 
-* Modular, domain‑driven architecture
-* REST & WebSocket APIs
-* Role‑based access control (RBAC)
-* API Key Management (scopes, rotation, expiry)
-* Real‑time order processing and analytics
+Next.js (App Router)
 
-### 🌐 Blockchain Layer (Stellar)
+TypeScript
 
-* Stellar‑native non‑custodial wallets
-* Fast settlement & low transaction fees
-* Soroban‑ready smart contract design
-* DAO‑compatible governance layer
-* Cross‑chain expansion roadmap
+Tailwind CSS + ShadCN UI
 
----
+SSR & SSG for performance
 
-## 🔐 Backend Features (NestJS)
+Secure auth flows and dashboards
 
-### Authentication & Security
+Real-time trading and simulation views
 
-* JWT authentication
-* Two‑factor authentication (2FA)
-* Password recovery
-* RBAC via NestJS Guards
-* Secure API Key Management
+⚙️ Backend (NestJS)
 
-### Trading Engine
+Modular, domain-driven architecture
 
-* Real‑time order matching
-* Market, limit, and stop orders
-* Order book management
-* Trade execution & settlement
+REST & WebSocket APIs
 
-### Wallet Management (Stellar‑Based)
+Role-based access control (RBAC)
 
-* Multi‑asset wallets
-* Deposits & withdrawals
-* Transaction history
-* Non‑custodial security model
+API Key management (scopes, rotation, expiry)
 
-### Market Data
+Real-time order processing
 
-* Real‑time price feeds
-* Historical OHLCV data
-* Market statistics
+🌐 Blockchain Layer (Stellar)
 
-### Admin & Governance
+Non-custodial Stellar wallets
 
-* User & role management
-* Market administration
-* Analytics & monitoring
-* DAO‑ready governance controls
+Fast settlement & low fees
 
----
+Soroban-ready smart contract design
 
-## 🧑‍💻 Tech Stack
+DAO-compatible governance
 
-### Frontend
+Cross-chain expansion roadmap
 
-* **Framework**: Next.js
-* **Language**: TypeScript
-* **UI**: Tailwind CSS, ShadCN UI
-* **State**: React Context / Zustand
-* **Data Fetching**: TanStack Query
-* **Deployment**: Vercel
+🔐 Backend Features
+Authentication & Security
 
-### Backend
+JWT authentication
 
-* **Framework**: NestJS
-* **Runtime**: Node.js 18+
-* **Database**: MongoDB + Mongoose
-* **Cache**: Redis
-* **Auth**: JWT, bcrypt
-* **Real‑time**: WebSockets
-* **Validation**: class‑validator
-* **Logging**: Winston
-* **Testing**: Jest, Supertest
+Two-factor authentication (2FA)
 
-### DevOps
+Password recovery
 
-* Docker & Docker Compose
-* GitHub Actions CI/CD
-* Environment‑based configuration
+RBAC via NestJS Guards
 
----
+Secure API key lifecycle management
 
-## 📦 Installation & Setup
+Trading Engine
 
-### Prerequisites
+Real-time order matching
 
-* Node.js 18+
-* MongoDB 5+
-* Redis 6+
+Market, limit, and stop orders
 
-### Local Development (Monorepo)
+Order book management
 
-```bash
+Trade execution & settlement
+
+Wallet Management
+
+Multi-asset wallets
+
+Deposits & withdrawals
+
+Transaction history
+
+Non-custodial security model
+
+🧑‍💻 Tech Stack
+Frontend
+
+Next.js, TypeScript
+
+Tailwind CSS, ShadCN UI
+
+TanStack Query
+
+Vercel deployment
+
+Backend
+
+NestJS (Node.js 18+)
+
+MongoDB + Mongoose
+
+Redis
+
+JWT, bcrypt
+
+WebSockets
+
+Jest & Supertest
+
+DevOps
+
+Docker & Docker Compose
+
+GitHub Actions CI/CD
+
+📦 Installation & Setup
+Prerequisites
+
+Ensure the following are installed:
+
+Node.js 18+
+
+MongoDB 5+
+
+Redis 6+
+
+Docker & Docker Compose (optional)
+
+Environment Setup
+cp .env.example .env
+
+Backend Environment Variables
+NODE_ENV=development
+PORT=4000
+
+MONGO_URI=mongodb://localhost:27017/nex-trade-wave
+REDIS_URL=redis://localhost:6379
+
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=15m
+
+API_KEY_SECRET=your_api_key_secret
+
+STELLAR_NETWORK=testnet
+STELLAR_HORIZON_URL=https://horizon-testnet.stellar.org
+
+
+⚠️ Never commit .env files.
+
+Local Development
 # Clone repository
 git clone https://github.com/KAMALDEEN333/nex-trade-waves
 cd nex-trade-waves
@@ -187,116 +202,79 @@ cd nex-trade-waves
 # Install dependencies
 npm install
 
-# Environment setup
-cp .env.example .env
-
-# Start backend (NestJS)
+# Start backend
 npm run start:dev
 
-# Start frontend (Next.js)
+# Start frontend
 npm run dev:frontend
-```
 
-### Docker Deployment
-
-```bash
+Docker Deployment
 docker-compose up -d
 docker-compose exec backend npm run seed
-```
 
----
+🧪 Testing
+Backend
+npm run test
+npm run test:e2e
+npm run test:cov
 
-## 🔗 API Overview (Backend)
+🌐 Network & Ports
+Service	Port
+Backend API	4000
+Frontend	3000
+MongoDB	27017
+Redis	6379
+🗂️ Project Structure
+nex-trade-waves/
+├── apps/
+│   ├── backend/        # NestJS API
+│   └── frontend/       # Next.js App
+├── docker/             # Docker configs
+├── docs/               # Architecture & API docs
+├── scripts/            # Seed & automation scripts
+├── docker-compose.yml
+├── .env.example
+└── README.md
 
-### Auth
+📚 Documentation & Resources
 
-* `POST /api/auth/register`
-* `POST /api/auth/login`
-* `GET /api/auth/me`
+API Docs (Swagger): http://localhost:4000/api/docs
 
-### Trading
+NestJS Docs: https://docs.nestjs.com
 
-* `POST /api/trading/order`
-* `GET /api/trading/orders`
-* `GET /api/trading/orderbook/:pair`
+Next.js Docs: https://nextjs.org/docs
 
-### Wallets
+Stellar Docs: https://developers.stellar.org
 
-* `GET /api/wallet`
-* `POST /api/wallet/deposit`
-* `POST /api/wallet/withdraw`
+🤝 Contributing
 
----
+Contributions are welcome 🚀
 
-## 🚧 Challenges & Solutions
+Fork the repository
 
-### Authentication & API Security
+Create a feature branch
 
-**Challenge**: Supporting users, DAO contributors, and integrations securely.
+git checkout -b feat/your-feature-name
 
-**Solution**:
 
-* RBAC with NestJS Guards
-* JWT lifecycle management
-* API key scopes, rotation, and expiration
+Commit clear, descriptive messages
 
-### Deployment & CI/CD
+Push and open a Pull Request
 
-**Challenge**: Environment consistency across Vercel and backend cloud providers.
+Ensure all tests pass
 
-**Solution**:
+🔗 Links
 
-* Multi‑stage Docker builds
-* Encrypted environment variables
-* GitHub Actions automated pipelines
+Live Frontend: https://nex-trade-waves.vercel.app/
 
----
+GitHub: https://github.com/KAMALDEEN333/nex-trade-waves
 
-## 🎯 Target Customers
+Live App: https://nex-trade-waves-ilgv90c7e-kamaldeen-aliyus-projects.vercel.app/
 
-* Aspiring & Intermediate Traders
-* Professional Traders
-* Educators & Institutions
-* Web3 Developers
-
----
-
-## 🏆 Competitors & Differentiation
-
-| Platform        | Limitation                  |
-| --------------- | --------------------------- |
-| Binance Academy | Education without execution |
-| TradingView     | Analytics without DeFi      |
-| dYdX            | Trading without learning    |
-| Bitget Academy  | Content‑only education      |
-
-**Nex Trade Wave uniquely unifies education, simulation, and decentralized execution.**
-
----
-
-## 📈 Distribution Strategy
-
-* Community‑led Web3 growth
-* Strategic Stellar ecosystem partnerships
-* Gamified simulations & hackathons
-* Content & thought leadership
-* Open API & developer ecosystem
-
----
-
-## 🌐 Links
-
-* **GitHub**: [https://github.com/KAMALDEEN333/nex-trade-waves](https://github.com/KAMALDEEN333/nex-trade-waves)
-* **Live App**: [https://nex-trade-waves-ilgv90c7e-kamaldeen-aliyus-projects.vercel.app/](https://nex-trade-waves-ilgv90c7e-kamaldeen-aliyus-projects.vercel.app/)
-
----
-
-## 📜 License
+📜 License
 
 MIT License
 
----
+🧠 Final Note
 
-## 🧠 Final Note
-
-Nex Trade Wave 🌊 is not just a trading platform — it is a **Stellar‑powered, education‑driven DeFi ecosystem** built to onboard the next generation of traders safely, intelligently, and transparently.
+Nex Trade Wave 🌊 is more than a trading platform—it is a Stellar-powered, education-driven DeFi ecosystem designed to onboard the next generation of traders safely, transparently, and intelligently.
