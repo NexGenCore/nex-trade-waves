@@ -1,1 +1,0 @@
-export { StellarWalletConnect as BasecoinWalletConnect } from "./stellar-wallet-connect"
